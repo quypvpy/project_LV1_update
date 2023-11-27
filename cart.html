@@ -229,11 +229,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
     <script>
       $(document).ready(function () {
         login();
-        // loadData();
-        // showMore();
         logout();
         loadCart();
-        // CheckOut();
+        CheckOut();
       });
       const url = "https://students.trungthanhweb.com/api/";
       // ===========Global Constant=============
@@ -248,68 +246,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
           toast.addEventListener("mouseleave", Swal.resumeTimer);
         },
       });
-
-
-
-      function loadData() {
-        $("#logoutbtn").hide();
-        if (
-          localStorage.getItem("token") &&
-          localStorage.getItem("token") != null
-        ) {
-          $("#loginBtn").hide();
-          $("#logoutbtn").show();
-          $("#showmorebtn").click(function (e) {
-            e.preventDefault();
-            showMore();
-          });
-        }
-      }
-      function showMore() {
-        $.ajax({
-          type: "GET",
-          url: link,
-          data: {
-            apitoken: localStorage.getItem("token"),
-          },
-          dataType: "JSON",
-          success: function (res) {
-            const brands = res.brands;
-            const categrories = res.categrories;
-            const products = res.products.data;
-            if (brands.length > 0) {
-              var str = ``;
-              brands.forEach((el) => {
-                str +=
-                  `
-                                <li><a class="dropdown-item" href="brands.html?id=` +
-                  el.id +
-                  `">` +
-                  el.name +
-                  `</a></li>
-                                `;
-              });
-              $("#brandUl").html(str);
-            }
-            if (categrories.length > 0) {
-              var str = ``;
-              categrories.forEach((el) => {
-                str +=
-                  `
-                                <li><a class="dropdown-item" href="categories.html?id=` +
-                  el.id +
-                  `">` +
-                  el.name +
-                  `</a></li>
-                                `;
-              });
-              $("#cateUl").html(str);
-            }
-
-            
-          },
-        });
-      }
 
 
       function CheckOut() {
